@@ -8,7 +8,21 @@ const stopRecordButton = document.getElementById('stopRecord');
 const downloadLink = document.getElementById('downloadLink');
 
 async function startCamera() {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    try {
+        const constraints = {
+            video: {
+                facingMode: 'user', // Use 'environment' for the back camera
+            },
+            audio: true
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        handleStream(stream);
+    } catch (error) {
+        console.error('Error accessing media devices.', error);
+    }
+}
+
+function handleStream(stream) {
     videoElement.srcObject = stream;
     mediaRecorder = new MediaRecorder(stream);
 
@@ -19,9 +33,7 @@ async function startCamera() {
     };
 
     mediaRecorder.onstop = () => {
-        const blob = new Blob(recordedChunks, {
-            type: 'video/webm'
-        });
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
         recordedChunks = [];
         const url = URL.createObjectURL(blob);
         recordedVideoElement.src = url;
@@ -44,4 +56,6 @@ stopRecordButton.addEventListener('click', () => {
     stopRecordButton.disabled = true;
 });
 
-startCamera();
+document.addEventListener('DOMContentLoaded', (event) => {
+    startCamera();
+});
