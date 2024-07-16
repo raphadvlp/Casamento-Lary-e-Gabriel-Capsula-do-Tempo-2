@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravador de Vídeo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gravador de Vídeo</h1>
+        <video id="video" autoplay></video>
+        <div class="controls">
+            <button id="startRecord">Iniciar Gravação</button>
+            <button id="stopRecord" disabled>Parar Gravação</button>
+        </div>
+        <video id="recordedVideo" controls style="display:none;"></video>
+        <a id="downloadLink" style="display:none;">Baixar Vídeo</a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
