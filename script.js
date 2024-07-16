@@ -1,5 +1,5 @@
-let mediaRecorder;
-let recordedChunks = [];
+let recorder;
+let stream;
 
 const videoElement = document.getElementById('video');
 const recordedVideoElement = document.getElementById('recordedVideo');
@@ -15,7 +15,7 @@ async function startCamera() {
             },
             audio: true
         };
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleStream(stream);
     } catch (error) {
         console.error('Error accessing media devices.', error);
@@ -24,34 +24,40 @@ async function startCamera() {
 
 function handleStream(stream) {
     videoElement.srcObject = stream;
-    mediaRecorder = new MediaRecorder(stream);
-
-    mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-            recordedChunks.push(event.data);
-        }
-    };
-
-    mediaRecorder.onstop = () => {
-        const blob = new Blob(recordedChunks, { type: 'video/webm' });
-        recordedChunks = [];
-        const url = URL.createObjectURL(blob);
-        recordedVideoElement.src = url;
-        recordedVideoElement.style.display = 'block';
-        downloadLink.href = url;
-        downloadLink.download = 'video.webm';
-        downloadLink.style.display = 'block';
-    };
+    recorder = RecordRTC(stream, {
+        type: 'video',
+        mimeType: 'video/mp4', // Define o formato de saída para MP4
+        bitsPerSecond: 128000 // Ajuste a qualidade conforme necessário
+    });
 }
 
 startRecordButton.addEventListener('click', () => {
-    mediaRecorder.start();
+    recorder.startRecording();
     startRecordButton.disabled = true;
     stopRecordButton.disabled = false;
 });
 
 stopRecordButton.addEventListener('click', () => {
-    mediaRecorder.stop();
+    recorder.stopRecording(() => {
+        const blob = recorder.getBlob();
+        const url = URL.createObjectURL(blob);
+        recordedVideoElement.src = url;
+        recordedVideoElement.style.display = 'block';
+        downloadLink.href = url;
+        downloadLink.download = 'video.mp4';
+        downloadLink.style.display = 'block';
+
+        // Para salvar localmente no iOS, convertemos para Data URL e abrimos em uma nova janela/tab
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const dataUrl = event.target.result;
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = 'video.mp4';
+            link.click();
+        };
+        reader.readAsDataURL(blob);
+    });
     startRecordButton.disabled = false;
     stopRecordButton.disabled = true;
 });
