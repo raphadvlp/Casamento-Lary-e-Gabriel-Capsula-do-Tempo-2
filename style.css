@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,25 +17,84 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    background-image: url('assets/image/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .container {
     text-align: center;
 }
 
+.container h1 {
+    font-family: "Playwrite CU", cursive;
+}
+
 video {
     width: 100%;
-    max-width: 600px;
+    max-width: 350px;
     border: 1px solid #ccc;
     margin-bottom: 20px;
 }
 
 .controls {
-    margin-bottom: 20px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    gap: 20px
 }
 
+/*
 button {
     padding: 10px 20px;
     margin: 5px;
     font-size: 16px;
+}
+*/
+
+#startRecord {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: red;
+    border: 1px solid #CCC;
+}
+
+#stopRecord {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: black;
+    border: 1px solid #CCC;
+}
+
+.controls button i {
+    color: #CCC;
+    font-size: 20px;
+}
+
+.btnEnviar{
+    margin-top: 20px;
+    width: 100%;
+}
+
+#sendRecord {
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(85, 85, 240);
+    color: #FFF;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #363636;
+}
+
+.text {
+    margin: 10px;
+}
+
+.text p {
+    font-weight: bold;
 }

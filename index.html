@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gravador de Vídeo</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
-        <h1>Gravador de Vídeo</h1>
+        <h1>Gabriel & Laryssa</h1>
         <video id="video" autoplay playsinline></video>
         <div class="controls">
-            <button id="startRecord">Iniciar Gravação</button>
-            <button id="stopRecord" disabled>Parar Gravação</button>
+            <button id="startRecord">
+                <i class="fa-solid fa-video"></i>
+            </button>
+            <button id="stopRecord" disabled>
+                <i class="fa-solid fa-stop"></i>
+            </button>
+        </div>
+        <div class="text">
+            <p><i>Inicie a gração, após gravar, de Stop e clique no botão abaixo para enviar.</i></p>
         </div>
         <video id="recordedVideo" controls style="display:none;"></video>
         <a id="downloadLink" style="display:none;">Baixar Vídeo</a>
+
+        <div class="btnEnviar">
+            <button id="sendRecord" onclick="enviarToDrive()">
+                Enviar
+            </button>
+        </div>
     </div>
     <script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
     <script src="script.js"></script>

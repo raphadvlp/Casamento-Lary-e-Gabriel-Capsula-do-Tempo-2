@@ -65,3 +65,8 @@ stopRecordButton.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', (event) => {
     startCamera();
 });
+
+
+function enviarToDrive() {
+    alert("Teste de envio!");
+}
