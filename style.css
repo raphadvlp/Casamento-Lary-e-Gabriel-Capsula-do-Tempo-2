@@ -17,7 +17,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    background-image: url('assets/image/bg.jpg');
+    background-image: url('assets/image/bg2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -29,6 +29,7 @@ body {
 
 .container h1 {
     font-family: "Playwrite CU", cursive;
+    margin-bottom: 15px;
 }
 
 video {
@@ -97,4 +98,5 @@ button {
 
 .text p {
     font-weight: bold;
+    color: #FFF;
 }
